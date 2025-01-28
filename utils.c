@@ -42,32 +42,48 @@ int	ft_strlcpy(char *dst, const char *src, int size)
 	return (size_src);
 }
 
-#include <stdio.h>
+char *ft_write_mini_path(char *mini_path, const char *dir, const char *command)
+{
+	const int size = ft_strlen(dir) + ft_strlen(command) + 2;
+	int i;
+	int j;
 
-char *ft_strtok(char *str, const char delim) {
-    
+	mini_path = malloc(sizeof(char) * size);
+	j = 0;
+	i = 0;
+	while(dir[j])
+		mini_path[i++] = dir[j++];
+	mini_path[i++] = '/';
+	j = 0;
+	while(command[j])
+		mini_path[i++] = command[j++];
+    mini_path[i] = 0;
+    return (mini_path);
+}
+
+char *ft_strtok(char *str, const char delim) 
+{
     static char *last = NULL;
     char *token;
-    if (str != NULL) 
-        last = str;
-    if (last == NULL)
-        return NULL;
-    while (*last == delim && *last != 0)
+
+	if (!str && !last)
+		return (NULL);
+	if (str)
+		last = str;
+	while (*last == delim && *last != 0)
         last++;
     if (*last == 0)
-        return NULL;
+        return (0);
     token = last;
     while (*last != delim && *last != 0)
         last++;
     if (*last != 0) 
-    {
-        *last = 0;
-        last++;
-    } 
+        *last++ = 0;
     else
         last = NULL;
     return token;
 }
+
 
 char	*ft_strdup(const char *s)
 {
@@ -98,7 +114,7 @@ char *get_path(char **envp) {
         if (ft_strncmp(envp[i], "PATH=", 5) == 0) {
             path = malloc(ft_strlen(envp[i]) + 1);
             if (path == NULL)
-                return (-1);
+                return (0);
             ft_strlcpy(path, envp[i] +5, ft_strlen(envp[i]) - 4);
             break;
         }

@@ -13,5 +13,7 @@
     char *get_path(char **envp);
     int	ft_strlcpy(char *dst, const char *src, int size);
     char	*ft_strdup(const char *s);
+    char *ft_write_mini_path(char *mini_path, const char *dir, const char *command);
+    char *ft_strtok(char *str, const char delim);
 
 # endif
