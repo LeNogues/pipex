@@ -2,8 +2,12 @@
 NAME = pipex
 
 # Fichiers sources
-SRCS =	test.c \
-		utils.c
+SRCS =	pipex.c \
+		mini_libft.c \
+		executable.c \
+		parsing.c \
+		path.c \
+		strtok.c
 
 OBJS = $(SRCS:.c=.o)
 
