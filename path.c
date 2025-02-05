@@ -6,7 +6,7 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:23:22 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/03 18:10:27 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:35:33 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_path(char **envp)
 			if (path == NULL)
 				return (0);
 			ft_strlcpy(path, envp[i] +5, ft_strlen(envp[i]) - 4);
-			//break ;
+			break ;
 		}
 		i++;
 	}

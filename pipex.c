@@ -12,27 +12,38 @@
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+int	pipex(int argc, char **argv, char **envp)
 {
 	char	*full_path;
 	int		id;
 	char	**executable;
+	int		pipe_fd[2];
+	char	buffer[128];
 
-	full_path = NULL;
+	if (pipe(pipe_fd) == -1)
+		return (-3);
 
 	executable = create_executable(argc, argv);
-	full_path = verif_arg(argc, argv, full_path, envp);
+	if (!executable)
+		return (-1);
+	full_path = verif_arg(argc, executable, envp);
+	if (!full_path)
+		return (free_executable(executable), -2);
+
 	id = fork();
 	if (id == 0)
-	{
-		if (execve(full_path, &executable[0], envp) == -1)
-		{
-			perror("execve");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-		wait(NULL);
-	free(full_path);
+		premiere_exec(full_path, executable, envp, pipe_fd);
+	read(pipe_fd[0], buffer, sizeof(buffer));
+	free_path_exec(full_path, executable);
+	return (1);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int	pipex_state;
+
+	pipex_state = pipex(argc, argv, envp);
+	if (pipex_state != 1)
+		error_message(pipex_state);
 	return (0);
 }

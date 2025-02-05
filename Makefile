@@ -7,7 +7,12 @@ SRCS =	pipex.c \
 		executable.c \
 		parsing.c \
 		path.c \
-		strtok.c
+		strtok.c \
+		ft_split.c \
+		clean.c \
+		error.c \
+		exec.c \
+		init.c
 
 OBJS = $(SRCS:.c=.o)
 

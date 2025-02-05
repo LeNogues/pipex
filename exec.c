@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 14:59:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/05 14:43:18 by sle-nogu         ###   ########.fr       */
+/*   Created: 2025/02/05 15:39:49 by sle-nogu          #+#    #+#             */
+/*   Updated: 2025/02/05 16:37:27 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*verif_arg(int argc, char **executable, char **envp)
-{	
-	char *full_path;
-	if (argc < 2)
+void premiere_exec(char *full_path, char **executable, char **envp, int pipe_fd[2])
+{
+    close(pipe_fd[0]);
+    dup2(pipe_fd[1], STDOUT_FILENO);
+    if (execve(full_path, executable, envp) == -1)
 	{
-		printf("Usage: %s <commande> [arguments...]\n", executable[0]);
+		perror("execve");
 		exit(EXIT_FAILURE);
 	}
-	full_path = get_path(envp);
-	if(!full_path)
+}
+
+void deuxieme_exec(char *full_path, char **executable, char **envp, int pipe_fd[2])
+{
+    close(pipe_fd[0]);
+    dup2(pipe_fd[1], STDOUT_FILENO);
+    if (execve(full_path, executable, envp) == -1)
 	{
-		error_message(-2);
-		free_path_exec(full_path, executable);
-		exit(EXIT_FAILURE);	
-	}
-	if (find_executable(executable[0], &full_path) == -1)
-	{
-		printf("Command not found: %s\n", executable[0]);
-		free_path_exec(full_path, executable);
+		perror("execve");
 		exit(EXIT_FAILURE);
 	}
-	return (full_path);
 }

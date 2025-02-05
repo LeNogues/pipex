@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strtok.c                                           :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 15:22:42 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/05 14:17:44 by sle-nogu         ###   ########.fr       */
+/*   Created: 2025/02/05 16:30:58 by sle-nogu          #+#    #+#             */
+/*   Updated: 2025/02/05 16:32:48 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strtok(char *str, const char delim)
+void    init(int argc, char **argv, char **envp, char **executable, char *full_path)
 {
-	static char	*last;
-	char		*token;
-
-	if (!last)
-		last = NULL;
-	if (!str && !last)
-		return (NULL);
-	if (str)
-		last = str;
-	while (*last == delim && *last != 0)
-		last++;
-	if (*last == 0)
-		return (0);
-	token = last;
-	while (*last != delim && *last != 0)
-		last++;
-	if (*last != 0)
-		*last++ = 0;
-	else
-		last = NULL;
-	return (token);
+    
 }
