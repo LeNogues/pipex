@@ -6,7 +6,7 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/03 18:23:05 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:36:05 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ int	find_executable(char *command, char **full_path)
 			free(path);
 			return (0);
 		}
-		printf("%s\n", dir);
 		dir = ft_strtok(NULL, ':');
-		printf("%s\n", dir);
 	}
 	free(path);
 	return (-1);
