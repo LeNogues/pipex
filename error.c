@@ -12,12 +12,12 @@
 
 #include "pipex.h"
 
-void    error_message(int error_code)
+void	error_message(int error_code)
 {
-	if(error_code == -1)
+	if (error_code == -1)
 		write(1, "Could not create executable\n", 29);
-	else if(error_code == -2)
+	else if (error_code == -2)
 		write(1, "Could not create full_path\n", 28);
-	else if(error_code == -3)
+	else if (error_code == -3)
 		write(1, "Could not create pipe\n", 23);
 }

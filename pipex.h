@@ -21,7 +21,8 @@
 
 //executable.c
 int		find_executable(char *command, char **full_path);
-char	**create_executable(int argc, char **argv);
+char	**create_executable1(int argc, char **argv);
+char	**create_executable2(int argc, char **argv);
 ////////////////////////////////////////////////////////  
 
 //mini_libft.c
@@ -55,11 +56,11 @@ void	free_executable(char **executable);
 ////////////////////////////////////////////////////////
 
 //error.c
-void    error_message(int error_code);
+void	error_message(int error_code);
 ////////////////////////////////////////////////////////
 
 //exec.c
-void	premiere_exec(char *full_path, char **executable, char **envp, int pipe_fd[2]);
-void	deuxieme_exec(char *full_path, char **executable, char **envp, int pipe_fd[2]);
+void	exec1(char *full_path, char **executable, char **envp, int pipe_fd[2]);
+void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2]);
 ////////////////////////////////////////////////////////
 #endif

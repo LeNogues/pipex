@@ -12,24 +12,22 @@
 
 #include "pipex.h"
 
-void premiere_exec(char *full_path, char **executable, char **envp, int pipe_fd[2])
+void	exec1(char *full_path, char **executable, char **envp, int pipe_fd[2])
 {
-    close(pipe_fd[0]);
-    dup2(pipe_fd[1], STDOUT_FILENO);
-    if (execve(full_path, executable, envp) == -1)
+	close(pipe_fd[0]);
+	dup2(pipe_fd[1], STDOUT_FILENO);
+	if (execve(full_path, executable, envp) == -1)
 	{
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
 }
 
-void deuxieme_exec(char *full_path, char **executable, char **envp, int pipe_fd[2])
+void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2])
 {
-    close(pipe_fd[0]);
-    dup2(pipe_fd[1], STDOUT_FILENO);
-    if (execve(full_path, executable, envp) == -1)
-	{
-		perror("execve");
-		exit(EXIT_FAILURE);
-	}
+	dup2(pipe_fd[0], STDIN_FILENO);
+	close(pipe_fd[0]);
+	execve(full_path, executable, envp);
+	perror("execlp");
+	exit(EXIT_FAILURE);
 }

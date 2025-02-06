@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-char	**create_executable(int argc, char **argv)
+char	**create_executable1(int argc, char **argv)
 {
 	int		i;
 	char	**executable;
@@ -28,11 +28,32 @@ char	**create_executable(int argc, char **argv)
 	return (executable);
 }
 
+char	**create_executable2(int argc, char **argv)
+{
+	int		i;
+	char	**executable;
+
+	i = 0;
+	(void)argc;
+	executable = ft_split(argv[3], ' ');
+	while (executable[i])
+		i++;
+	i++;
+	executable[i] = NULL;
+	return (executable);
+}
+
 int	find_executable(char *command, char **full_path)
 {
 	char	*path;
 	char	*dir;
 
+	if (access(command, X_OK) == 0)
+	{
+		free(*full_path);
+		*full_path = ft_strdup(command);
+		return (0);
+	}
 	path = ft_strdup(*full_path);
 	if (!path)
 		return (-1);

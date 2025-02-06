@@ -12,7 +12,6 @@ SRCS =	pipex.c \
 		clean.c \
 		error.c \
 		exec.c \
-		init.c
 
 OBJS = $(SRCS:.c=.o)
 
