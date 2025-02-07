@@ -12,15 +12,10 @@
 
 #include "pipex.h"
 
-char	*verif_arg(int argc, char **executable, char **envp)
+char	*verif_arg(char **executable, char **envp)
 {
 	char	*full_path;
 
-	if (argc < 2)
-	{
-		printf("Usage: %s <commande> [arguments...]\n", executable[0]);
-		exit(EXIT_FAILURE);
-	}
 	full_path = get_path(envp);
 	if (!full_path)
 	{
@@ -30,7 +25,7 @@ char	*verif_arg(int argc, char **executable, char **envp)
 	}
 	if (find_executable(executable[0], &full_path) == -1)
 	{
-		printf("Command not found: %s\n", executable[0]);
+		write(1, "Command not found\n", 19);
 		free_path_exec(full_path, executable);
 		exit(EXIT_FAILURE);
 	}

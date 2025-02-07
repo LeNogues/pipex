@@ -18,7 +18,12 @@ char	**create_executable1(int argc, char **argv)
 	char	**executable;
 
 	i = 0;
-	(void)argc;
+	if (argc != 5)
+	{
+		write(1, "Usage: ./pipex infile \"command1 + arguments\" ", 46);
+		write(1, "\"command2 + arguments\" outfile\n", 32);
+		exit(EXIT_FAILURE);
+	}
 	executable = ft_split(argv[2], ' ');
 	while (executable[i])
 		i++;
@@ -63,10 +68,7 @@ int	find_executable(char *command, char **full_path)
 		free(*full_path);
 		*full_path = ft_write_mini_path(*full_path, dir, command);
 		if (access(*full_path, X_OK) == 0)
-		{
-			free(path);
-			return (0);
-		}
+			return (free(path), 0);
 		dir = ft_strtok(NULL, ':');
 	}
 	free(path);
