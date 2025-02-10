@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:28:48 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/10 15:29:24 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/10 16:51:19 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_args
 {
-	char	*outfile;
+	char	*file;
 	char	*full_path;
 	char	**executable;
 }				t_args;
@@ -76,6 +76,7 @@ void	error_message(int error_code);
 void	exec1(char *full_path, char **executable, char **envp, int pipe_fd[2]);
 void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2]);
 void	execute_with_output(t_args *args, char **envp, int pipe_fd[2]);
+void	execute_with_input(t_args *args, char **envp, int pipe_fd[2]);
 ////////////////////////////////////////////////////////
 
 //handle_cmd.c
