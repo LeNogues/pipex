@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:39:49 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/10 17:19:24 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/10 19:27:36 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	execute_with_input(t_args *args, char **envp, int pipe_fd[2])
 		perror("open");
 		exit(EXIT_FAILURE);
 	}
-	dup2(file_fd, STDIN_FILENO);
-	close(file_fd);
+	else
+	{
+		dup2(file_fd, STDIN_FILENO);
+		close(file_fd);
+	}
 	exec1(args->full_path, args->executable, envp, pipe_fd);
 }
 
