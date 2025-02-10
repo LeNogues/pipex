@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executable.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/05 16:34:19 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:35:26 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ char	**create_executable1(int argc, char **argv)
 	}
 	executable = ft_split(argv[2], ' ');
 	while (executable[i])
+	{
 		i++;
-	executable[i] = ft_strdup(argv[1]);
+	}
 	i++;
 	executable[i] = NULL;
 	return (executable);

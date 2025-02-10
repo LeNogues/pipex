@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:39:49 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/07 15:23:00 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/10 16:36:11 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2])
 	execve(full_path, executable, envp);
 	perror("execlp");
 	exit(EXIT_FAILURE);
+}
+
+void	execute_with_input(t_args *args, char **envp, int pipe_fd[2])
+{
+	int	file_fd;
+
+	file_fd = open(args->outfile, O_RDONLY, 0777);
+	if (file_fd == -1)
+	{
+		perror("open");
+		exit(EXIT_FAILURE);
+	}
+	dup2(file_fd, STDIN_FILENO);
+	close(file_fd);
+	exec1(args->full_path, args->executable, envp, pipe_fd);
 }
 
 void	execute_with_output(t_args *args, char **envp, int pipe_fd[2])

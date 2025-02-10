@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:28:48 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/07 15:25:47 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/10 15:29:24 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 ////////////////////////////////////////////////////////    
 
 //parsing.c
-char	*verif_arg(char **argv, char **envp);
+char	*verif_arg1(char **argv, char **envp);
+char	*verif_arg2(char **argv, char **envp);
 ////////////////////////////////////////////////////////
 
 //path.c
@@ -59,6 +60,7 @@ char	*ft_strtok(char *str, const char delim);
 
 //ft_split.c
 char	**ft_split(char const *s, char c);
+char	**ft_split1(char const *s, char c);
 ////////////////////////////////////////////////////////
 
 //clean.c

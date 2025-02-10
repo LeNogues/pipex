@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:23:26 by seb               #+#    #+#             */
-/*   Updated: 2025/02/07 15:26:02 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/10 16:35:41 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	handle_second_cmd(int argc, char **argv, char **envp, int pipe_fd[2])
 	executable = create_executable2(argc, argv);
 	if (!executable)
 		return (-1);
-	full_path = verif_arg(executable, envp);
+	full_path = verif_arg2(executable, envp);
 	if (!full_path)
 		return (free_executable(executable), -2);
 	args.outfile = argv[4];
@@ -46,7 +46,7 @@ int	handle_first_cmd(int argc, char **argv, char **envp, int pipe_fd[2])
 	executable = create_executable1(argc, argv);
 	if (!executable)
 		return (-1);
-	full_path = verif_arg(executable, envp);
+	full_path = verif_arg1(executable, envp);
 	if (!full_path)
 		return (free_executable(executable), -2);
 	id = fork();
@@ -55,7 +55,6 @@ int	handle_first_cmd(int argc, char **argv, char **envp, int pipe_fd[2])
 	else
 	{
 		close(pipe_fd[1]);
-		wait(NULL);
 	}
 	free_path_exec(full_path, executable);
 	return (0);
