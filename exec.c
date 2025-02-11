@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:39:49 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/10 19:27:36 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/11 16:01:01 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	exec1(char *full_path, char **executable, char **envp, int pipe_fd[2])
 {
 	close(pipe_fd[0]);
 	dup2(pipe_fd[1], STDOUT_FILENO);
-	if (execve(full_path, executable, envp) == -1)
-		exit(EXIT_FAILURE);
+	execve(full_path, executable, envp);
+	exit(EXIT_FAILURE);
 }
 
 void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2])

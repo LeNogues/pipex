@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:23:26 by seb               #+#    #+#             */
-/*   Updated: 2025/02/10 16:51:29 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/11 15:39:31 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int	handle_first_cmd(int argc, char **argv, char **envp, int pipe_fd[2])
 	if (id == 0)
 		execute_with_input(&args, envp, pipe_fd);
 	else
-	{
 		close(pipe_fd[1]);
-	}
 	free_path_exec(full_path, executable);
 	return (0);
 }
