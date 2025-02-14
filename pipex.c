@@ -47,7 +47,7 @@ int	pipex(char **argv, char **envp)
 
 	if (pipe(pipe_fd) == -1)
 		return (-3);
-	if(verif_infile(argv[1]) != -1)
+	if (verif_infile(argv[1]) != -1)
 	{
 		result = handle_first_cmd(argv, envp, pipe_fd);
 		if (result != 0)
@@ -60,6 +60,6 @@ int	pipex(char **argv, char **envp)
 			return (result);
 	}
 	close(pipe_fd[0]);
-
+	close(pipe_fd[1]);
 	return (1);
 }

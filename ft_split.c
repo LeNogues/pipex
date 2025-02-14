@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:11:31 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 14:44:47 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/14 19:54:20 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,12 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
+static void	split_string(const char *s, char c, char **tab)
 {
-	int		i;
-	int		j;
-	int		start;
-	char	**tab;
+	int	i;
+	int	j;
+	int	start;
 
-	if(s[0] == 32 && s[1] == 0)
-	{
-		tab = malloc(sizeof(char *) * 1);
-		tab[0] = 0;
-		return (tab);
-	}
-	tab = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!s || !tab)
-		return (0);
 	i = 0;
 	j = 0;
 	start = -1;
@@ -77,5 +67,21 @@ char	**ft_split(char const *s, char c)
 		i++;
 	}
 	tab[j] = 0;
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**tab;
+
+	if (s[0] == 32 && s[1] == 0)
+	{
+		tab = malloc(sizeof(char *) * 1);
+		tab[0] = 0;
+		return (tab);
+	}
+	tab = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!s || !tab)
+		return (0);
+	split_string(s, c, tab);
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:28:48 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 16:27:46 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/14 19:49:54 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_args
 
 //pipex.c
 int		pipex(char **argv, char **envp);
-int	verif_infile(char *file);
+int		verif_infile(char *file);
 //////////////////////////////////////////////////////// 
 
 //executable.c
