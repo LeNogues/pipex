@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:28:48 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 15:11:03 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/14 16:27:46 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ typedef struct s_args
 }				t_args;
 
 //pipex.c
-int		pipex(int argc, char **argv, char **envp);
+int		pipex(char **argv, char **envp);
 int	verif_infile(char *file);
 //////////////////////////////////////////////////////// 
 
 //executable.c
 int		find_executable(char *command, char **full_path);
-char	**create_executable1(int argc, char **argv);
+char	**create_executable1(char **argv);
 char	**create_executable2(char **argv);
 ////////////////////////////////////////////////////////  
 
@@ -81,7 +81,7 @@ void	execute_with_input(t_args *args, char **envp, int pipe_fd[2]);
 ////////////////////////////////////////////////////////
 
 //handle_cmd.c
-int		handle_first_cmd(int argc, char **argv, char **envp, int pipe_fd[2]);
+int		handle_first_cmd(char **argv, char **envp, int pipe_fd[2]);
 int		handle_second_cmd(char **argv, char **envp, int pipe_fd[2]);
 ////////////////////////////////////////////////////////
 #endif

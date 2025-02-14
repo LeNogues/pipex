@@ -6,22 +6,16 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 14:51:04 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/14 16:26:54 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**create_executable1(int argc, char **argv)
+char	**create_executable1(char **argv)
 {
 	char	**executable;
 
-	if (argc != 5)
-	{
-		write(1, "Usage: ./pipex infile \"command1 + arguments\" ", 46);
-		write(1, "\"command2 + arguments\" outfile\n", 32);
-		exit(EXIT_FAILURE);
-	}
 	executable = ft_split(argv[2], ' ');
 	return (executable);
 }

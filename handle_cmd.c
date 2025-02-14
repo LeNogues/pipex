@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:23:26 by seb               #+#    #+#             */
-/*   Updated: 2025/02/14 16:11:06 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/14 18:18:49 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	handle_second_cmd(char **argv, char **envp, int pipe_fd[2])
 	return (0);
 }
 
-int	handle_first_cmd(int argc, char **argv, char **envp, int pipe_fd[2])
+int	handle_first_cmd(char **argv, char **envp, int pipe_fd[2])
 {
 	char	**executable;
 	char	*full_path;
 	int		id;
 	t_args	args;
 
-	executable = create_executable1(argc, argv);
+	executable = create_executable1(argv);
 	full_path = verif_arg1(executable, envp);
 	if (!full_path)
 		return (free_executable(executable), -2);

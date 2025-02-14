@@ -40,7 +40,7 @@ int	verif_outfile(char *file)
 	return (1);
 }
 
-int	pipex(int argc, char **argv, char **envp)
+int	pipex(char **argv, char **envp)
 {
 	int	pipe_fd[2];
 	int	result;
@@ -49,7 +49,7 @@ int	pipex(int argc, char **argv, char **envp)
 		return (-3);
 	if(verif_infile(argv[1]) != -1)
 	{
-		result = handle_first_cmd(argc, argv, envp, pipe_fd);
+		result = handle_first_cmd(argv, envp, pipe_fd);
 		if (result != 0)
 			return (result);
 	}
@@ -60,6 +60,6 @@ int	pipex(int argc, char **argv, char **envp)
 			return (result);
 	}
 	close(pipe_fd[0]);
-	wait(NULL);
+
 	return (1);
 }
