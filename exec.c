@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:39:49 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/11 16:01:01 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:06:53 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	exec1(char *full_path, char **executable, char **envp, int pipe_fd[2])
 	close(pipe_fd[0]);
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	execve(full_path, executable, envp);
+	free_path_exec(full_path, executable);
 	exit(EXIT_FAILURE);
 }
 
@@ -25,6 +26,7 @@ void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2])
 	dup2(pipe_fd[0], STDIN_FILENO);
 	close(pipe_fd[0]);
 	execve(full_path, executable, envp);
+	free_path_exec(full_path, executable);
 	exit(EXIT_FAILURE);
 }
 
@@ -54,9 +56,13 @@ void	execute_with_output(t_args *args, char **envp, int pipe_fd[2])
 	if (file_fd == -1)
 	{
 		perror("open");
+		free_path_exec(args->full_path, args->executable);
 		exit(EXIT_FAILURE);
 	}
-	dup2(file_fd, STDOUT_FILENO);
-	close(file_fd);
-	exec2(args->full_path, args->executable, envp, pipe_fd);
+	else
+	{
+		dup2(file_fd, STDOUT_FILENO);
+		close(file_fd);
+		exec2(args->full_path, args->executable, envp, pipe_fd);
+	}
 }

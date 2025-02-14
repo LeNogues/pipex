@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executable.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/11 15:36:32 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:51:04 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 char	**create_executable1(int argc, char **argv)
 {
-	int		i;
 	char	**executable;
 
-	i = 0;
 	if (argc != 5)
 	{
 		write(1, "Usage: ./pipex infile \"command1 + arguments\" ", 46);
@@ -25,23 +23,14 @@ char	**create_executable1(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	executable = ft_split(argv[2], ' ');
-	while (executable[i])
-	{
-		i++;
-	}
 	return (executable);
 }
 
-char	**create_executable2(int argc, char **argv)
+char	**create_executable2(char **argv)
 {
-	int		i;
 	char	**executable;
 
-	i = 0;
-	(void)argc;
 	executable = ft_split(argv[3], ' ');
-	while (executable[i])
-		i++;
 	return (executable);
 }
 

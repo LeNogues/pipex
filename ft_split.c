@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:11:31 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/11 15:30:56 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:44:47 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ char	**ft_split(char const *s, char c)
 	int		start;
 	char	**tab;
 
+	if(s[0] == 32 && s[1] == 0)
+	{
+		tab = malloc(sizeof(char *) * 1);
+		tab[0] = 0;
+		return (tab);
+	}
 	tab = malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!s || !tab)
 		return (0);

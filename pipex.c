@@ -47,13 +47,15 @@ int	pipex(int argc, char **argv, char **envp)
 
 	if (pipe(pipe_fd) == -1)
 		return (-3);
-	verif_infile(argv[1]);
-	result = handle_first_cmd(argc, argv, envp, pipe_fd);
-	if (result != 0)
-		return (result);
+	if(verif_infile(argv[1]) != -1)
+	{
+		result = handle_first_cmd(argc, argv, envp, pipe_fd);
+		if (result != 0)
+			return (result);
+	}
 	if (verif_outfile(argv[4]) != -1)
 	{
-		result = handle_second_cmd(argc, argv, envp, pipe_fd);
+		result = handle_second_cmd(argv, envp, pipe_fd);
 		if (result != 0)
 			return (result);
 	}
