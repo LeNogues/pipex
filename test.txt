@@ -1,3 +1,0 @@
-bonjour 42
-Ceci est un test
-Ecole 42 rocks!
