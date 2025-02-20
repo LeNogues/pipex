@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 16:26:54 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/20 14:03:40 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	find_executable(char *command, char **full_path)
 	{
 		free(*full_path);
 		*full_path = ft_strdup(command);
+		printf("test\n");
 		return (0);
 	}
+	printf("%s\n", command);
 	path = ft_strdup(*full_path);
 	if (!path)
 		return (-1);

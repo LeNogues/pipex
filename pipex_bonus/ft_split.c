@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:11:31 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 19:54:20 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/18 16:05:18 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static char	*word_dup(const char *str, int start, int finish)
 
 	i = 0;
 	word = malloc((finish - start + 1) * sizeof(char));
+	if(!word)
+		return (0);
 	while (start < finish)
 		word[i++] = str[start++];
 	word[i] = '\0';

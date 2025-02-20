@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:23:26 by seb               #+#    #+#             */
-/*   Updated: 2025/02/14 18:18:49 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/19 16:01:41 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	handle_second_cmd(char **argv, char **envp, int pipe_fd[2])
 		execute_with_output(&args, envp, pipe_fd);
 	else
 		close(pipe_fd[0]);
+	wait(NULL);
 	free_path_exec(full_path, executable);
 	return (0);
 }

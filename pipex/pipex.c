@@ -59,6 +59,7 @@ int	pipex(char **argv, char **envp)
 		if (result != 0)
 			return (result);
 	}
+	wait(NULL);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	return (1);
