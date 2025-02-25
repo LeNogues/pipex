@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:11:31 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/18 16:05:18 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/25 11:29:21 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*word_dup(const char *str, int start, int finish)
 
 	i = 0;
 	word = malloc((finish - start + 1) * sizeof(char));
-	if(!word)
+	if (!word)
 		return (0);
 	while (start < finish)
 		word[i++] = str[start++];

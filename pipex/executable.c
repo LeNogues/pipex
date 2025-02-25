@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executable.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/23 17:24:48 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/25 13:11:03 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	find_executable(char *command, char **full_path)
 	{
 		free(*full_path);
 		*full_path = ft_strdup(command);
-		printf("test\n");
 		return (0);
 	}
 	path = ft_strdup(*full_path);

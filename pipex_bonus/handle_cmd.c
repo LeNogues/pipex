@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:23:26 by seb               #+#    #+#             */
-/*   Updated: 2025/02/24 15:58:24 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/25 17:54:17 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,15 @@ int	handle_last_cmd(int argc, char **argv, char **envp, t_pipe pipe_fd)
 	if (id == 0 && executable[0] != 0)
 		execute_with_output(&args, envp, pipe_fd);
 	else
-		close(pipe_fd.new[0]);
+	{
+		close(pipe_fd.old[0]);
+		close(pipe_fd.old[1]);
+	}
 	free_path_exec(full_path, executable);
 	return (0);
 }
 
-int	handle_first_cmd(char **argv, char **envp, t_pipe pipe_fd)
+int	handle_first_cmd(char **argv, char **envp, t_pipe *pipe_fd)
 {
 	char	**executable;
 	char	*full_path;
@@ -51,9 +54,7 @@ int	handle_first_cmd(char **argv, char **envp, t_pipe pipe_fd)
 	args.executable = executable;
 	id = fork();
 	if (id == 0 && executable[0] != 0)
-		execute_with_input(&args, envp, pipe_fd);
-	else
-		close(pipe_fd.new[1]);
+		execute_with_input(&args, envp, *pipe_fd);
 	free_path_exec(full_path, executable);
 	return (0);
 }
