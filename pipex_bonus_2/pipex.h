@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 15:21:22 by seb               #+#    #+#             */
-/*   Updated: 2025/02/23 17:34:29 by seb              ###   ########.fr       */
+/*   Created: 2025/02/23 21:05:18 by seb               #+#    #+#             */
+/*   Updated: 2025/02/23 21:19:01 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#ifndef PIPEX_H
+# define PIPEX_H
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
-int	main(int argc, char **argv, char **envp)
+
+typedef struct				s_heredoc
 {
-	int	pipex_state;
+	char					*ofile;
+	char					*limiter;
+	char					*cmd1;
+	char					*cmd2;
+	int						pipe[2];
+}                           t_heredoc;
 
-	if (argc < 5)
-	{
-		write(1, "Usage: ./pipex infile \"command1 + arguments\" ", 46);
-		write(1, "\"command2 + arguments\" outfile\n", 32);
-		exit(EXIT_FAILURE);
-	}
-	pipex_state = pipex(argc, argv, envp);
-	if (pipex_state != 1)
-		error_message(pipex_state);
-	return (0);
-}
+#endif

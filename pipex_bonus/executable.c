@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/17 15:53:30 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/23 17:58:44 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ char	**create_executable1(char **argv)
 	return (executable);
 }
 
-char	**create_executable2(char **argv)
+char	**create_executable2(int argc, char **argv)
 {
 	char	**executable;
 
-	executable = ft_split(argv[3], ' ');
+	executable = ft_split(argv[argc - 2], ' ');
 	return (executable);
 }
 

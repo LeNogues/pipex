@@ -6,31 +6,31 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:39:49 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 18:33:51 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/24 17:13:31 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	exec1(char *full_path, char **executable, char **envp, int pipe_fd[2])
+void	exec1(char *full_path, char **executable, char **envp, t_pipe pipe_fd)
 {
-	close(pipe_fd[0]);
-	dup2(pipe_fd[1], STDOUT_FILENO);
+	close(pipe_fd.new[0]);
+	dup2(pipe_fd.new[1], STDOUT_FILENO);
 	execve(full_path, executable, envp);
 	free_path_exec(full_path, executable);
 	exit(EXIT_FAILURE);
 }
 
-void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2])
+void	exec2(char *full_path, char **executable, char **envp, t_pipe pipe_fd)
 {
-	dup2(pipe_fd[0], STDIN_FILENO);
-	close(pipe_fd[0]);
+	dup2(pipe_fd.new[0], STDIN_FILENO);
+	close(pipe_fd.new[0]);
 	execve(full_path, executable, envp);
 	free_path_exec(full_path, executable);
 	exit(EXIT_FAILURE);
 }
 
-void	execute_with_input(t_args *args, char **envp, int pipe_fd[2])
+void	execute_with_input(t_args *args, char **envp, t_pipe pipe_fd)
 {
 	int	file_fd;
 
@@ -48,7 +48,7 @@ void	execute_with_input(t_args *args, char **envp, int pipe_fd[2])
 	exec1(args->full_path, args->executable, envp, pipe_fd);
 }
 
-void	execute_with_output(t_args *args, char **envp, int pipe_fd[2])
+void	execute_with_output(t_args *args, char **envp, t_pipe pipe_fd)
 {
 	int	file_fd;
 
@@ -66,3 +66,15 @@ void	execute_with_output(t_args *args, char **envp, int pipe_fd[2])
 		exec2(args->full_path, args->executable, envp, pipe_fd);
 	}
 }
+
+void execute_middle(t_args *args, char **envp, t_pipe pipe_fd)
+{
+	dup2(pipe_fd.new[0], STDIN_FILENO);
+	close(pipe_fd.new[0]);
+	dup2(pipe_fd.new[1], STDOUT_FILENO);
+	close(pipe_fd.new[0]);
+	execve(args->full_path, args->executable, envp);
+	free_path_exec(args->full_path, args->executable);
+	exit(EXIT_FAILURE);
+}
+

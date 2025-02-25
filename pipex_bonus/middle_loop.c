@@ -6,12 +6,13 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:39:38 by seb               #+#    #+#             */
-/*   Updated: 2025/02/17 16:08:29 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/24 17:11:16 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/*
 static int	count_middle_cmd(char **argv)
 {
 	int	i;
@@ -62,29 +63,42 @@ char	*join_all_argv(char **argv, int nb_middle_cmd)
 		nb_rotation++;
 	}
 	return (str);
+}*/
+
+static void pipecpy(int new_fd[2], int old_fd[2])
+{
+    close(old_fd[0]);
+    close(old_fd[1]);
+    old_fd[0] = new_fd[0];
+    old_fd[1] = new_fd[1];
+    if (pipe(new_fd) == -1)
+    {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
 }
 
-void	loop_on_middle_cmd(char **argv, char **envp, int pipe_fd[2])
+int	loop_on_middle_cmd(int argc, char **argv, char **envp, t_pipe pipe_fd)
 {
-	int			i;
-	const int	nb_middle_cmd = count_middle_cmd(argv);
-	char		*argv_one_arg;
-	char		**executable;
-
-	i = 0;
-	(void)envp;
-	(void)pipe_fd;
-	argv_one_arg = join_all_argv(argv, nb_middle_cmd);
-	//debut de la boucle
-	//je ft_split(ft_strtok) pour chaque iteration
-	executable = create_executable_middle(ft_strtok(argv_one_arg, '|'));
-	printf("%s\n", executable[1]);
-	while (i < nb_middle_cmd - 1)
+	int i;
+	int id;
+	t_args	args;
+	
+	i = 3;
+	while(i < argc - 2)
 	{
-		executable = create_executable_middle(ft_strtok(NULL, '|'));
-		printf("%s\n", executable[1]);
+		args.file = NULL;
+		args.executable = ft_split(argv[i], ' ');
+		args.full_path = verif_arg(args.executable, envp);
+		if (!args.full_path)
+			return (free_executable(args.executable), -2);
+		id = fork();
+		if (id == 0 && args.executable[0] != 0)
+			execute_middle(&args, envp, pipe_fd);
+		else
+			pipecpy(pipe_fd.new, pipe_fd.old);
+		free_path_exec(args.full_path, args.executable);
 		i++;
 	}
-	printf("%d\n", nb_middle_cmd);
-	free(argv_one_arg);
+	return (0);
 }

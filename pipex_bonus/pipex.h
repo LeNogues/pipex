@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:28:48 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/17 15:55:41 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/24 15:57:02 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,20 @@ typedef struct s_args
 	char	**executable;
 }				t_args;
 
+typedef struct	s_pipe
+{
+	int		old[2];
+	int		new[2];
+}				t_pipe;
+
 //pipex.c
-int		pipex(char **argv, char **envp);
+int		pipex(int argc, char **argv, char **envp);
 //////////////////////////////////////////////////////// 
 
 //executable.c
 int		find_executable(char *command, char **full_path);
 char	**create_executable1(char **argv);
-char	**create_executable2(char **argv);
+char	**create_executable2(int argc, char **argv);
 char	**create_executable_middle(char *str);
 ////////////////////////////////////////////////////////  
 
@@ -46,8 +52,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 ////////////////////////////////////////////////////////    
 
 //parsing.c
-char	*verif_arg1(char **argv, char **envp);
-char	*verif_arg2(char **argv, char **envp);
+char	*verif_arg(char **argv, char **envp);
 ////////////////////////////////////////////////////////
 
 //path.c
@@ -74,15 +79,16 @@ void	error_message(int error_code);
 ////////////////////////////////////////////////////////
 
 //exec.c
-void	exec1(char *full_path, char **executable, char **envp, int pipe_fd[2]);
-void	exec2(char *full_path, char **executable, char **envp, int pipe_fd[2]);
-void	execute_with_output(t_args *args, char **envp, int pipe_fd[2]);
-void	execute_with_input(t_args *args, char **envp, int pipe_fd[2]);
+void	exec1(char *full_path, char **executable, char **envp, t_pipe pipe_fd);
+void	exec2(char *full_path, char **executable, char **envp, t_pipe pipe_fd);
+void	execute_with_output(t_args *args, char **envp, t_pipe pipe_fd);
+void	execute_with_input(t_args *args, char **envp, t_pipe pipe_fd);
+void	execute_middle(t_args *args, char **envp, t_pipe pipe_fd);
 ////////////////////////////////////////////////////////
 
 //handle_cmd.c
-int		handle_first_cmd(char **argv, char **envp, int pipe_fd[2]);
-int		handle_second_cmd(char **argv, char **envp, int pipe_fd[2]);
+int		handle_first_cmd(char **argv, char **envp, t_pipe pipe_fd);
+int		handle_last_cmd(int argc, char **argv, char **envp, t_pipe pipe_fd);
 ////////////////////////////////////////////////////////
 
 //verif.c
@@ -91,7 +97,7 @@ int		verif_infile(char *file);
 ////////////////////////////////////////////////////////
 
 //middle_cmd.c
-void	loop_on_middle_cmd(char **argv, char **envp, int pipe_fd[2]);
+int	loop_on_middle_cmd(int argc, char **argv, char **envp, t_pipe pipe_fd);
 ////////////////////////////////////////////////////////
 
 #endif

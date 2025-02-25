@@ -5,25 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 15:21:22 by seb               #+#    #+#             */
-/*   Updated: 2025/02/23 17:34:29 by seb              ###   ########.fr       */
+/*   Created: 2025/02/23 21:03:51 by seb               #+#    #+#             */
+/*   Updated: 2025/02/23 21:11:36 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	int	pipex_state;
+	int         is_heredoc;
+	t_heredoc   heredoc;
 
-	if (argc < 5)
+	is_heredoc = 0;
+	if(argc >= 2)
+		is_heredoc = (ft_strcmp(argv[1], "here_doc") == 0);
+	if(argc < 5 || (is_heredoc == 1 && argc != 6))
+		return (error(1));
+	if (is_heredoc == 1)
 	{
-		write(1, "Usage: ./pipex infile \"command1 + arguments\" ", 46);
-		write(1, "\"command2 + arguments\" outfile\n", 32);
-		exit(EXIT_FAILURE);
+		heredoc.cmd1 = argv[3];
+		heredoc.cmd1 = argv[4];
+		heredoc.limiter = argv[2];
+		heredoc.ofile = argv[5];
+		manage_heredoc(heredoc, envp);
+		return (0);
 	}
-	pipex_state = pipex(argc, argv, envp);
-	if (pipex_state != 1)
-		error_message(pipex_state);
-	return (0);
 }
