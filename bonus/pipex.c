@@ -35,8 +35,6 @@ int	pipex(int argc, char **argv, char **envp)
 		if (result != 0)
 			return (result);
 	}
-	close(pipe_fd.new[0]);
-	close(pipe_fd.new[1]);
 	while (waitpid(0, NULL, 0) != -1)
 		;
 	return (1);
