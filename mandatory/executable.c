@@ -6,7 +6,7 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:35:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/25 13:11:03 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:52:42 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	**create_executable1(char **argv)
 	char	**executable;
 
 	executable = ft_split(argv[2], ' ');
+	if(!executable)
+		return (0);
 	return (executable);
 }
 
@@ -25,6 +27,8 @@ char	**create_executable2(char **argv)
 	char	**executable;
 
 	executable = ft_split(argv[3], ' ');
+	if(!executable)
+		return (0);
 	return (executable);
 }
 
@@ -33,12 +37,6 @@ int	find_executable(char *command, char **full_path)
 	char	*path;
 	char	*dir;
 
-	if (access(command, X_OK) == 0)
-	{
-		free(*full_path);
-		*full_path = ft_strdup(command);
-		return (0);
-	}
 	path = ft_strdup(*full_path);
 	if (!path)
 		return (-1);

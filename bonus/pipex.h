@@ -6,12 +6,17 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:28:48 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/25 14:48:32 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:22:01 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+
+# endif
 
 # include <fcntl.h>
 # include <stdio.h>
@@ -25,6 +30,15 @@ typedef struct s_args
 	char	*full_path;
 	char	**executable;
 }			t_args;
+
+typedef struct s_here_doc
+{
+	char	**cmd1;
+	char	**cmd2;
+	char	*limiter;
+	char	*file;
+	int		state;
+}			t_here_doc;
 
 typedef struct s_pipe
 {
@@ -103,5 +117,18 @@ int			loop_on_middle_cmd(int argc, char **argv, char **envp,
 				t_pipe *pipe_fd);
 void		pipecpy(int new_fd[2], int old_fd[2]);
 ////////////////////////////////////////////////////////
+
+//here_doc.c
+int here_doc(char **argv, t_here_doc hd, char **envp);
+////////////////////////////////////////////////////////
+
+//get_next_line
+char	*get_lines(char *buffer, char *init_line);
+void	next_line(char *buffer);
+char	*get_next_line(int fd);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_bzero(void *s, size_t n);
+////////////////////////////////////////////////////////
+
 
 #endif

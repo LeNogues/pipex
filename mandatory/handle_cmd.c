@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:23:26 by seb               #+#    #+#             */
-/*   Updated: 2025/02/19 16:01:41 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/26 18:05:38 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	handle_second_cmd(char **argv, char **envp, int pipe_fd[2])
 	t_args	args;
 
 	executable = create_executable2(argv);
+	if(!executable)
+		return (0);
 	full_path = verif_arg2(executable, envp);
 	if (!full_path)
 		return (free_executable(executable), -2);
@@ -44,6 +46,8 @@ int	handle_first_cmd(char **argv, char **envp, int pipe_fd[2])
 	t_args	args;
 
 	executable = create_executable1(argv);
+	if(!executable)
+		return (0);
 	full_path = verif_arg1(executable, envp);
 	if (!full_path)
 		return (free_executable(executable), -2);
@@ -51,6 +55,8 @@ int	handle_first_cmd(char **argv, char **envp, int pipe_fd[2])
 	args.full_path = full_path;
 	args.executable = executable;
 	id = fork();
+	if(id == -1)
+		return(free_path_exec(full_path, executable), -2);
 	if (id == 0 && executable[0] != 0)
 		execute_with_input(&args, envp, pipe_fd);
 	else

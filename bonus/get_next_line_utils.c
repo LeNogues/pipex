@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 15:21:22 by seb               #+#    #+#             */
-/*   Updated: 2025/02/26 12:45:37 by sle-nogu         ###   ########.fr       */
+/*   Created: 2024/12/03 13:29:21 by sle-nogu          #+#    #+#             */
+/*   Updated: 2025/02/27 13:01:06 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+void	*ft_bzero(void *s, size_t n)
 {
-	int	pipex_state;
+	unsigned char	*str;
+	size_t			i;
 
-	if (argc != 5)
+	str = s;
+	i = 0;
+	while (i < n)
 	{
-		write(1, "Usage: ./pipex infile \"command1 + arguments\" ", 46);
-		write(1, "\"command2 + arguments\" outfile\n", 32);
-		exit(EXIT_FAILURE);
+		str[i] = 0;
+		i++;
 	}
-	pipex_state = pipex(argv, envp);
-	if (pipex_state != 1)
-		error_message(pipex_state);
-	return (0);
+	return (s);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*zone;
+
+	if (size != 0 && nmemb > (size_t) - 1 / size)
+		return (0);
+	zone = (void *) malloc(nmemb * size);
+	if (!zone)
+		return (0);
+	ft_bzero(zone, size * nmemb);
+	return (zone);
 }

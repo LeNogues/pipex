@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:59:14 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/14 19:50:11 by seb              ###   ########.fr       */
+/*   Updated: 2025/02/27 12:51:57 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*verif_arg1(char **executable, char **envp)
 {
 	char	*full_path;
 
+	if (access(executable[0], X_OK) == 0)
+		return (ft_strdup(executable[0]));
 	full_path = get_path(envp);
 	if (!full_path)
 	{
@@ -31,6 +33,8 @@ char	*verif_arg1(char **executable, char **envp)
 	{
 		write(1, "Command not found\n", 19);
 		full_path = ft_strdup("/usr/bin");
+		if (!full_path)
+			return (0);
 	}
 	return (full_path);
 }
@@ -39,6 +43,11 @@ char	*verif_arg2(char **executable, char **envp)
 {
 	char	*full_path;
 
+	if (access(executable[0], X_OK) == 0)
+	{
+		full_path = ft_strdup(executable[0]);
+		return (full_path);
+	}
 	full_path = get_path(envp);
 	if (!full_path)
 	{

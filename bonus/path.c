@@ -6,7 +6,7 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:23:22 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/05 11:35:33 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:27:47 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_write_mini_path(char *mini_path, char *dir, char *command)
 	int			j;
 
 	mini_path = malloc(sizeof(char) * size);
+	if(!mini_path)
+		return (0);
 	j = 0;
 	i = 0;
 	while (dir[j])

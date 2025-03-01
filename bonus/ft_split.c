@@ -6,7 +6,7 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 12:11:31 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/25 11:29:21 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:35:33 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,20 @@ char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 
+	
+	if (!s || !c)
+		return (NULL);
 	if (s[0] == 32 && s[1] == 0)
 	{
 		tab = malloc(sizeof(char *) * 1);
+		if(!tab)
+			return (0);
 		tab[0] = 0;
 		return (tab);
 	}
 	tab = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!s || !tab)
-		return (0);
+	if (!tab)
+		exit (EXIT_FAILURE);
 	split_string(s, c, tab);
 	return (tab);
 }

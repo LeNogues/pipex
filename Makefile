@@ -6,7 +6,7 @@
 #    By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 10:14:48 by sle-nogu          #+#    #+#              #
-#    Updated: 2025/02/26 10:40:44 by sle-nogu         ###   ########.fr        #
+#    Updated: 2025/02/27 13:07:03 by sle-nogu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,10 @@ SRC_BONUS=	./bonus/pipex.c \
 			./bonus/main.c \
 			./bonus/handle_cmd.c \
 			./bonus/middle_loop.c \
-			./bonus/verif.c
+			./bonus/verif.c \
+			./bonus/here_doc.c \
+			./bonus/get_next_line.c \
+			./bonus/get_next_line_utils.c
 
 OBJS_BONUS=$(SRC_BONUS:.c=.o)
 

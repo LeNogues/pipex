@@ -6,7 +6,7 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:23:26 by seb               #+#    #+#             */
-/*   Updated: 2025/02/25 17:54:17 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:52:57 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	handle_last_cmd(int argc, char **argv, char **envp, t_pipe pipe_fd)
 	t_args	args;
 
 	executable = create_executable2(argc, argv);
+	if(!executable)
+		return (0);
 	full_path = verif_arg(executable, envp);
 	if (!full_path)
 		return (free_executable(executable), -2);
@@ -46,6 +48,8 @@ int	handle_first_cmd(char **argv, char **envp, t_pipe *pipe_fd)
 	t_args	args;
 
 	executable = create_executable1(argv);
+	if(!executable)
+		return (0);
 	full_path = verif_arg(executable, envp);
 	if (!full_path)
 		return (free_executable(executable), -2);

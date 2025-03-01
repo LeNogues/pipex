@@ -6,7 +6,7 @@
 /*   By: sle-nogu <sle-nogu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:57:31 by sle-nogu          #+#    #+#             */
-/*   Updated: 2025/02/03 17:59:20 by sle-nogu         ###   ########.fr       */
+/*   Updated: 2025/03/01 11:47:18 by sle-nogu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
+	printf("caca\n");
 	while (str[i])
 		i++;
 	return (i);
